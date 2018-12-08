@@ -54,7 +54,7 @@ closePrices_test = closePrices[700:900]
 closePrices_verification = closePrices[900:]
 pass
 
-iterations = 10  # 循环次数
+iterations = 1000  # 循环次数
 alpha = 0.0001  # 步长
 countNum = 0  # 循环从零开始
 
