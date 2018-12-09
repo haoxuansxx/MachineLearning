@@ -9,7 +9,7 @@ from sklearn.naive_bayes import GaussianNB
 
 # Importing dataset.
 # Please refer to the 【Data】 part after the code for the data file.
-data = pd.read_excel("career_data.csv")
+data = pd.read_csv("career_data.csv")
 
 # Convert categorical variable to numeric
 data["985_cleaned"] = np.where(data["985"] == "Yes", 1, 0)
