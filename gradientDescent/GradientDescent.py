@@ -28,27 +28,27 @@ dates_train = dates[:700]
 dates_test = dates[700:900]
 dates_verification = dates[900:]
 
-# 每日最高价 特征数据集分为训练集和测试集
+# 每日最高价 特征数据集分为训练集、测试集和验证集
 highPrices_train = highPrices[:700]
 highPrices_test = highPrices[700:900]
 highPrices_verification = highPrices[900:]
 
-# 最低价 特征数据集分为训练集和测试集
+# 最低价 特征数据集分为训练集、测试集和验证集
 lowPrices_train = lowPrices[:700]
 lowPrices_test = lowPrices[700:900]
 lowPrices_verification = lowPrices[900:]
 
-# 开盘价 特征数据集分为训练集和测试集
+# 开盘价 特征数据集分为训练集、测试集和验证集
 openPrices_train = openPrices[:700]
 openPrices_test = openPrices[700:900]
 openPrices_verification = openPrices[900:]
 
-# 交易量 特征数据集分为训练集和测试集
+# 交易量 特征数据集分为训练集、测试集和验证集
 volumes_train = volumes[:700]
 volumes_test = volumes[700:900]
 volumes_verification = volumes[900:]
 
-# 收盘价 目标数据（特征对应的真实值）也分为训练集和测试集
+# 收盘价 目标数据（特征对应的真实值）也分为训练集、测试集和验证集
 closePrices_train = closePrices[:700]
 closePrices_test = closePrices[700:900]
 closePrices_verification = closePrices[900:]
