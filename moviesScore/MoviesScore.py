@@ -1,8 +1,13 @@
 # -*- coding:utf-8 -*-
 # __author__ = "Sun"
+
 import pandas as pd
 import numpy as np
 from moviesScore.moviesDataUtils import *
+
+###
+# 使用极大似然估算得出电影评分模型
+###
 
 data = pd.read_csv("movies_dataset.csv")
 
@@ -18,7 +23,7 @@ used_features = ["chinese_name", "english_name", "director", "starring", "type",
     选取有用特征
     axis：0-行操作（默认），1-列操作
     how：any-只要有空值就删除（默认），all-全部为空值才删除
-    inplace：False-返回新的数据集（默认），True-在愿数据集上操作
+    inplace：False-返回新的数据集（默认），True-在原数据集上操作
 """
 
 dataset = data[used_features].applymap(lambda x: x.replace("\'", '').replace(r"\n", "").strip()).applymap(
@@ -33,9 +38,9 @@ rateList = list(dataset["rate"])  # 评分
 
 # 中文电影名 名称数据集分为训练集、测试集和验证集
 englishNameList = list(dataset["chinese_name"])
-englishName_train = englishNameList[:1500]
-englishName_test = englishNameList[1500:1800]
-englishName_verification = englishNameList[1800:]
+englishName_train = englishNameList[:20000]
+englishName_test = englishNameList[20000:23000]
+englishName_verification = englishNameList[23000:]
 
 # 英文电影名
 englishNameList = list(dataset["english_name"])
@@ -53,9 +58,9 @@ for i in range(len(directorList)):
     pass
     directorList[i] = sum
 pass
-director_train = directorList[:1500]
-director_test = directorList[1500:1800]
-director_verification = directorList[1800:]
+director_train = directorList[:20000]
+director_test = directorList[20000:23000]
+director_verification = directorList[23000:]
 
 " 将主演数据以不重复放入到dict中，取出现的总次数为数值 "
 # 主演 特征数据集分为训练集、测试集和验证集
@@ -70,9 +75,9 @@ for i in range(len(starringList)):
     pass
     starringList[i] = sum
 pass
-starring_train = starringList[:1500]
-starring_test = starringList[1500:1800]
-starring_verification = starringList[1800:]
+starring_train = starringList[:20000]
+starring_test = starringList[20000:23000]
+starring_verification = starringList[23000:]
 
 " 将类型数据以不重复放入到dict中，取出现的总次数为数值 "
 # 类型 特征数据集分为训练集、测试集和验证集
@@ -87,9 +92,9 @@ for i in range(len(typeList)):
     pass
     typeList[i] = sum
 pass
-type_train = typeList[:1500]
-type_test = typeList[1500:1800]
-type_verification = typeList[1800:]
+type_train = typeList[:20000]
+type_test = typeList[20000:23000]
+type_verification = typeList[23000:]
 
 " 将发行日期分为：发行季度和发行月份 "
 releaseDateList = list(dataset["release_date"])  # 发行日期
@@ -97,19 +102,19 @@ releaseQuarterList = []  # 发行季度列表
 releaseMonthList = []  # 发行月份列表
 releaseQuarterList, releaseMonthList = cloumnDate(releaseDateList)
 # 发行季度 特征数据集分为训练集、测试集和验证集
-releaseQuarter_train = releaseQuarterList[:1500]
-releaseQuarter_test = releaseQuarterList[1500:1800]
-releaseQuarter_verification = releaseQuarterList[1800:]
+releaseQuarter_train = releaseQuarterList[:20000]
+releaseQuarter_test = releaseQuarterList[20000:23000]
+releaseQuarter_verification = releaseQuarterList[23000:]
 # 发行月份 特征数据集分为训练集、测试集和验证集
-releaseMonth_train = releaseMonthList[:1500]
-releaseMonth_test = releaseMonthList[1500:1800]
-releaseMonth_verification = releaseMonthList[1800:]
+releaseMonth_train = releaseMonthList[:20000]
+releaseMonth_test = releaseMonthList[20000:23000]
+releaseMonth_verification = releaseMonthList[23000:]
 
 # 投票数 特征数据集分为训练集、测试集和验证集
 votesList = list(map(int, dataset["votes"]))
-votes_train = votesList[:1500]
-votes_test = votesList[1500:1800]
-votes_verification = votesList[1800:]
+votes_train = votesList[:20000]
+votes_test = votesList[20000:23000]
+votes_verification = votesList[23000:]
 
 " 将发行地区数据以不重复放入到dict中，取出现的总次数为数值 "
 # 发行地区 特征数据集分为训练集、测试集和验证集
@@ -124,15 +129,15 @@ for i in range(len(regionList)):
     pass
     regionList[i] = sum
 pass
-region_train = regionList[:1500]
-region_test = regionList[1500:1800]
-region_verification = regionList[1800:]
+region_train = regionList[:20000]
+region_test = regionList[20000:23000]
+region_verification = regionList[23000:]
 
 # 播放次数 特征数据集分为训练集、测试集和验证集
 runtimeList = list(map(int, dataset["runtime"]))
-runtime_train = runtimeList[:1500]
-runtime_test = runtimeList[1500:1800]
-runtime_verification = runtimeList[1800:]
+runtime_train = runtimeList[:20000]
+runtime_test = runtimeList[20000:23000]
+runtime_verification = runtimeList[23000:]
 
 " 将分级数据以不重复放入到dict中，取出现的总次数为数值 "
 # 分级 特征数据集分为训练集、测试集和验证集
@@ -142,9 +147,9 @@ certificationKey = cloumnSingleKeyList(certificationList)
 for i in range(len(certificationList)):
     certificationList[i] = certificationKey[certificationList[i]]
 pass
-certification_train = certificationList[:1500]
-certification_test = certificationList[1500:1800]
-certification_verification = certificationList[1800:]
+certification_train = certificationList[:20000]
+certification_test = certificationList[20000:23000]
+certification_verification = certificationList[23000:]
 
 " 将语言数据以不重复放入到dict中，取出现的总次数为数值 "
 # 语言 特征数据集分为训练集、测试集和验证集
@@ -159,9 +164,9 @@ for i in range(len(languageList)):
     pass
     languageList[i] = sum
 pass
-language_train = languageList[:1500]
-language_test = languageList[1500:1800]
-language_verification = languageList[1800:]
+language_train = languageList[:20000]
+language_test = languageList[20000:23000]
+language_verification = languageList[23000:]
 
 " 将发行公司数据以不重复放入到dict中，取出现的总次数为数值 "
 # 发行公司 特征数据集分为训练集、测试集和验证集
@@ -171,18 +176,28 @@ companyKey = cloumnSingleKeyList(companyList)
 for i in range(len(companyList)):
     companyList[i] = companyKey[companyList[i]]
 pass
-company_train = companyList[:1500]
-company_test = companyList[1500:1800]
-company_verification = companyList[1800:]
+company_train = companyList[:20000]
+company_test = companyList[20000:23000]
+company_verification = companyList[23000:]
 
 rateList = list(dataset["rate"])  # 评分
 # 评分 结果数据集也分为训练集、测试集和验证集
-rate_train = rateList[:1500]
-rate_test = rateList[1500:1800]
-rate_verification = rateList[1800:]
-iterations = 10000  # 循环次数
+rate_train = rateList[:20000]
+rate_test = rateList[20000:23000]
+rate_verification = rateList[23000:]
+iterations = 100  # 循环次数
 alpha = 0.00000001  # 步长
 countNum = 0  # 循环从零开始
+
+for i in range(len(votes_train)):
+    votes_train[i] = 0
+pass
+for i in range(len(votes_test)):
+    votes_test[i] = 0
+pass
+for i in range(len(votes_verification)):
+    votes_verification[i] = 0
+pass
 
 m = len(rate_train)
 theta = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]

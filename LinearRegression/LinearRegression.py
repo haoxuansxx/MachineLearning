@@ -5,8 +5,12 @@ import matplotlib.pyplot as plt
 import numpy as np
 from sklearn import datasets, linear_model
 
-experiences = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])
-salaries = np.array([103100, 104900, 106800, 108700, 110400, 112300, 114200, 116100, 117800, 119700, 121600])
+###
+# 线性回归加梯度下降法求年限和年限比模型
+###
+
+experiences = np.array([0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10])  # 年限
+salaries = np.array([103100, 104900, 106800, 108700, 110400, 112300, 114200, 116100, 117800, 119700, 121600])  # 年薪
 
 # 将特征数据集分为训练集和测试集，除了最后 4 个作为测试用例，其他都用于训练
 X_train = experiences[:7]

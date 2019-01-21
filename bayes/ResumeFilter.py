@@ -3,6 +3,8 @@
 import pandas as pd
 import numpy as np
 
+""" 朴素贝叶斯分类器求简历筛选模型 """
+
 # degree:学历、education:毕业院校、skills:技能、working_experience:曾经工作过的公司、position:当前职位
 data = pd.read_csv("employees_dataset.csv")
 

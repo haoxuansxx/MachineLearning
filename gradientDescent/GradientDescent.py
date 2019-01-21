@@ -3,8 +3,11 @@
 
 import pandas as pd
 import numpy
-import numpy as np
-import datetime, time
+import datetime
+
+###
+# 线性回归加梯度下降法求出收盘价模型
+###
 
 data = pd.read_csv("msft_stockprices_dataset.csv")
 
